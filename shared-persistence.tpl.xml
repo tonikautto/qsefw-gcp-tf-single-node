@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<SharedPersistenceConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DbUserName>qlikrepositoryservice</DbUserName>
+  <DbUserPassword>${qse_db_repo_pwd}</DbUserPassword>
+  <DbHost>${qse_cn_hostname}</DbHost>
+  <DbPort>4432</DbPort>
+  <RootDir>\\${qse_cn_hostname}\${qse_share_name}</RootDir>
+  <StaticContentRootDir>\\${qse_cn_hostname}\${qse_share_name}\StaticContent</StaticContentRootDir>
+  <CustomDataRootDir>\\${qse_cn_hostname}\${qse_share_name}\CustomData</CustomDataRootDir>
+  <ArchivedLogsDir>\\${qse_cn_hostname}\${qse_share_name}\ArchivedLogs</ArchivedLogsDir>
+  <AppsDir>\\${qse_cn_hostname}\${qse_share_name}\Apps</AppsDir>
+  <CreateCluster>true</CreateCluster>
+  <InstallLocalDb>true</InstallLocalDb>
+  <ConfigureDbListener>false</ConfigureDbListener>
+</SharedPersistenceConfiguration>

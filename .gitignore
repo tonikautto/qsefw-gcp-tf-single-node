@@ -1,0 +1,24 @@
+#  Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars
+!*.tpl.tfvars
+
+# Exclude account config file
+**/account.json
+
+# Exclude generated RDP file
+*.rdp
+!*.tpl.rdp
+
+# secret files
+**/.secrets/*
+*secret*
+
+# remote exec files
+**/remote-files/*
