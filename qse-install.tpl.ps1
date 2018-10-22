@@ -68,9 +68,14 @@ do {
 } While(!(Get-Module -ListAvailable -Name Qlik-CLI))
 
 # Connect to the Qlik Sense, when installation has finished
+# Force Qlik services start if delayed afte rinstall
 do {
     Write-Host "Waiting for Qlik Sense to finish installing..."
-    Start-Sleep -Seconds 60
+    Start-Sleep -Seconds 120
+
+    $QlikServices = Get-Service "Qlik*" | Where-Object {($_.Name -like "QlikSense*" -and $_.Name -notlike "QlikSenseRepositoryDatabase") -or ($_.Name -eq "QlikLoggingService")}
+    $QlikServices | Start-Service 
+        
 } While( (Connect-Qlik ${qse_cn_hostname} -TrustAllCerts -UseDefaultCredentials -ErrorAction SilentlyContinue).length -eq 0 )
 
 # CONFIGURE QLIK SENSE
