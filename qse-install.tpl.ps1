@@ -97,6 +97,7 @@ Update-QlikUser -id $(Get-QlikUser -full -filter "name eq '${qse_svc_user}'").id
 # TBD: Allocate professional license to admin user
 
 # Whitelist external IP
-Update-QlikVirtualProxy -id $((Get-QlikVirtualProxy).id) -websocketCrossOriginWhiteList ${google_compute_instance.qs-central-node.*.network_interface.0.access_config.0.assigned_nat_ip[0]}
+$external_ip = Invoke-RestMethod http://ipinfo.io/json | Select -exp ip
+Update-QlikVirtualProxy -id $((Get-QlikVirtualProxy).id) -websocketCrossOriginWhiteList $external_ip
 
 Stop-Transcript
