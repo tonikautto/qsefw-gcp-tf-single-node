@@ -5,7 +5,8 @@
 *.tfstate
 *.tfstate.*
 
-# .tfvars files
+# Ignore all .tfvars files, except template tpl.tfvars
+# This ignores any local tfvar variants but keeps generic template (tpl.tfvars) file
 *.tfvars
 !*.tpl.tfvars
 

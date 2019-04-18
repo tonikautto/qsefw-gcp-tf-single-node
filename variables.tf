@@ -22,8 +22,7 @@ variable "central_node_tag" {
   default = "qse-node-central"
 }
 variable "qse_installer_url" {
-  description = "URL to Qlik Sense Enterprise installer. Default is for June 2018 release."  
-  default = "https://da3hntz84uekx.cloudfront.net/QlikSense/12.36/0/_MSI/Qlik_Sense_setup.exe"  // Sep 2018
+  description = "URL to Qlik Sense Enterprise installer. "  
 }
 variable "qse_cn_hostname" {
   description = "Windows host name for Qlik Sense central node"

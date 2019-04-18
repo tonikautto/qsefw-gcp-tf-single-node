@@ -15,7 +15,7 @@ gcp_service_account = "qsefw-sa@qsefw-tf-single-node.iam.gserviceaccount.com"
 # ID of GCP project to deploy in
 # Set to qsefw-gcp-tf if you followed the GCP setup in README
 
-project_id = "qsefw-tf-single-node"
+#project_id = "PROJECT_ID"
 
 # Google Compute Engine (GKE) configuration
 # Machine type reference: https://cloud.google.com/compute/docs/machine-types
@@ -33,3 +33,6 @@ boot_disk_size_type   = "pd-standard"
 #qse_license_control        = "QLIK_SENSE_LICENSE_CONTROL_NO"
 #qse_license_name           = "QLIK_SENSE_LICENSE_NAME"
 #qse_license_org            = "QLIK_SENSE_LICENSE_ORG"
+
+# The downlaod URL for Qlik Sense installer. Below link goes to February 2019 release.
+ qse_installer_url  = "https://da3hntz84uekx.cloudfront.net/QlikSense/13.9/0/_MSI/Qlik_Sense_setup.exe" 

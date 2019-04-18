@@ -17,13 +17,14 @@ This Terraform project will deploy a Windows Server 2016 in Google Cloud Platfor
 The deployment requires a service account with correct associated roles. This can be setup manually in GCP Console or through Google Cloud SDK as show below.
 
 1. Login to GCP<br/> `gcloud auth login your@mail.com`
-1. Create project to host the Qlik Sense deployment<br/> `gcloud projects create qsefw-tf-single-node --name='QSEfW Single Node'`
-1. Set new project as active<br/> `gcloud config set project qsefw-tf-single-node`
+1. Create project with a new unique project id<br/> `gcloud projects create --name='QSEfW Single Node'`
+1. Take note of the project id. Use it instead of PROJECT_ID in all following commands. 
+1. Set new project as active<br/> `gcloud config set project qsefw-single-node-238003`
 1. Add service account *qsefw-sa* to project<br/> `gcloud iam service-accounts create qsefw-sa --display-name='QSEfW Service Account'`
-1. Create GCP account file for the service account, and store in .secrets folder<br/> `gcloud iam service-accounts keys create ./.secrets/account.json --iam-account qsefw-sa@qsefw-tf-single-node.iam.gserviceaccount.com` 
+1. Create GCP account file for the service account, and store in .secrets folder<br/> `gcloud iam service-accounts keys create ./.secrets/account.json --iam-account qsefw-sa@qsefw-single-node-238003.iam.gserviceaccount.com` 
 1. Bind service account to required roles 
-    * Compute Engine Admin<br/> `gcloud projects add-iam-policy-binding qsefw-tf-single-node --member serviceAccount:qsefw-sa@qsefw-tf-single-node.iam.gserviceaccount.com --role roles/compute.admin`
-    * Compute Network Admin<br/> `gcloud projects add-iam-policy-binding qsefw-tf-single-node --member serviceAccount:qsefw-sa@qsefw-tf-single-node.iam.gserviceaccount.com --role roles/compute.networkAdmin`
+    * Compute Engine Admin<br/> `gcloud projects add-iam-policy-binding qsefw-single-node-238003 --member serviceAccount:qsefw-sa@qsefw-single-node-238003.iam.gserviceaccount.com --role roles/compute.admin`
+    * Compute Network Admin<br/> `gcloud projects add-iam-policy-binding qsefw-single-node-238003 --member serviceAccount:qsefw-sa@qsefw-single-node-238003.iam.gserviceaccount.com --role roles/compute.networkAdmin`
 1. Enable required APIs. Following billing enablement link if required. 
     * Compute Engine API <br/> `gcloud services enable compute.googleapis.com`
 
@@ -34,7 +35,7 @@ Terraform prompts for undefined variables during validation and execution.
 *.tfvars* files can be used to define variabel values, prior to Terrafrom validation and execution. *variables.tpl.tfvars* contains a template for required variables for this project. 
 
 *.tfvars* can be picked up automatically by Terraform, if file is renamed as *.auto.tfvars*.<br/>
-`mv variables.tfvars variables.auto.tfvars` 
+`mv variables.tpl.tfvars variables.auto.tfvars` 
 
 If not automated, *.tfvars* file is applied by reference through command parameter.<br/>
 `terraform plan -var-file="variables.tfvars"`<br/>
