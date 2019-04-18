@@ -1,7 +1,7 @@
 Single node Qlik Sense in GCP through Terraform
 ===
 
-This Terraform project will deploy a Windows Server 2016 in Google Cloud Platform (GCP). Qlik Sense Enterprise June 2018 will then be downloaded, installed and enabled through a startup PS1 script.
+This Terraform project will deploy a Windows Server 2016 in Google Cloud Platform (GCP). Qlik Sense Enterprise February 2019 will then be downloaded, installed and enabled through a startup PS1 script.
 
 ![Single node Qlik Sense Enterprise in Google Cloud Platfrom](qsefw-gcp.png)
 
