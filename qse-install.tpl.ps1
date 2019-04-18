@@ -94,8 +94,8 @@ Invoke-QlikPost "/qrs/user" $json
 # Promote service accoutn to RootAdmin
 Update-QlikUser -id $(Get-QlikUser -full -filter "name eq '${qse_svc_user}'").id -roles "RootAdmin" | Out-Null
 
-# Allocate professional license to admin and service account
-(Get-QlikUser -filter "userDirectory eq '${upper(var.qse_cn_hostname)}'").id | `
+# Allocate professional license to all users from local domain
+(Get-QlikUser -filter "userDirectory eq '${upper(qse_cn_hostname)}'").id | `
 ForEach-Object { `
     Invoke-QlikPost -path "/qrs/license/professionalaccesstype" `
                     -body "{`"user`":{`"id`":`"$_`"}}" `
