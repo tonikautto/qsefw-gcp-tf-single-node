@@ -63,7 +63,7 @@ Install-Module -Name Qlik-CLI -Force  | Out-Null
 # Wait for Qlik CLI to install 
 do {
     Write-Host "Waiting for Qlik CLI to finish installing..."
-    Start-Sleep -Seconds 10
+    Start-Sleep -Seconds 30
     Import-Module Qlik-CLI -ErrorAction SilentlyContinue
 } While(!(Get-Module -ListAvailable -Name Qlik-CLI))
 
@@ -80,8 +80,10 @@ do {
 
 # CONFIGURE QLIK SENSE
 
+# Set license
 Set-QlikLicense -serial "${qse_license}" -control "${qse_control}" -name "${qse_name}" -organization "${qse_org}"
 
+# Add service accoutn as user
 $json = (@{userId = "${qse_svc_user}";
             userDirectory = "${qse_cn_hostname}";
             name = "${qse_svc_user}";
@@ -89,9 +91,12 @@ $json = (@{userId = "${qse_svc_user}";
 
 Invoke-QlikPost "/qrs/user" $json
 
+# Promote service accoutn to RootAdmin
 Update-QlikUser -id $(Get-QlikUser -full -filter "name eq '${qse_svc_user}'").id -roles "RootAdmin" | Out-Null
 
-#TBD: White list public Ip 
-#$external_ip = Invoke-RestMethod http://ipinfo.io/json | Select -exp ip
+# TBD: Allocate professional license to admin user
+
+# Whitelist external IP
+Update-QlikVirtualProxy -id $((Get-QlikVirtualProxy).id) -websocketCrossOriginWhiteList ${google_compute_instance.qs-central-node.*.network_interface.0.access_config.0.assigned_nat_ip[0]}
 
 Stop-Transcript
