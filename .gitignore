@@ -17,7 +17,8 @@
 *.rdp
 !*.tpl.rdp
 
-# secret files
+# Ignore anything in the secrets folder 
+# and files with secret in their name
 **/.secrets/*
 *secret*
 

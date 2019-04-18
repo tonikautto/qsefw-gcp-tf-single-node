@@ -94,10 +94,15 @@ Invoke-QlikPost "/qrs/user" $json
 # Promote service accoutn to RootAdmin
 Update-QlikUser -id $(Get-QlikUser -full -filter "name eq '${qse_svc_user}'").id -roles "RootAdmin" | Out-Null
 
-# TBD: Allocate professional license to admin user
+# Allocate professional license to admin and service account
+(Get-QlikUser -filter "userDirectory eq '${upper(var.qse_cn_hostname)}'").id | `
+ForEach-Object { `
+    Invoke-QlikPost -path "/qrs/license/professionalaccesstype" `
+                    -body "{`"user`":{`"id`":`"$_`"}}" `
+}
 
 # Whitelist external IP
-$external_ip = Invoke-RestMethod http://ipinfo.io/json | Select -exp ip
+$external_ip = Invoke-RestMethod http://ipinfo.io/json | Select-Object -exp ip
 Update-QlikVirtualProxy -id $((Get-QlikVirtualProxy).id) -websocketCrossOriginWhiteList $external_ip
 
 Stop-Transcript
