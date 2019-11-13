@@ -52,6 +52,9 @@ $arguments = @("-silent -log ""${install_files_path}\qsefw-installation.log""", 
 Write-Host "Initiating silent Qlik Sense installation..."
 $arguments
 
+#VM needs more time
+Start-Sleep -Seconds 120
+
 Start-Process -FilePath "${install_files_path}\Qlik_Sense_setup.exe" -ArgumentList $arguments -NoNewWindow
 
 
